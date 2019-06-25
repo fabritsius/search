@@ -45,6 +45,7 @@ func crawl(uri string, depth int, domains []string,
 
 	content, err := buildIndex(uri)
 	if err != nil {
+		fmt.Println(err)
 		return
 	}
 
