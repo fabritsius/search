@@ -54,7 +54,7 @@ func crawl(uri string, depth int, domains []string,
 	if depth > 0 {	
 		for _, next := range content.links {
 			if strings.HasPrefix(next, "/") {
-				next = strings.Join(strings.Split(content.uri, "/")[0:3], "/") + next
+				next = getLinkDomain(content.uri) + next
 			}
 			if validDomain(next, domains) {
 				if _, exists := crawled[next]; !exists {					
@@ -75,6 +75,12 @@ func validDomain(link string, domains []string) bool {
 	}
 
 	return false
+}
+
+// getLinkDomain returns protocol and domain parts of URI
+func getLinkDomain(link string) string {
+	rgx := regexp.MustCompile(`\w+:\/\/[^/]+`)
+	return rgx.FindString(link)
 }
 
 // webPage represents a content of a web page
