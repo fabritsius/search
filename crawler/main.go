@@ -66,7 +66,7 @@ func crawl(uri string, depth int, domains []string,
 	}
 }
 
-// validDomain checks if a link is to any an allowed domain
+// validDomain checks if a link is to an allowed domain
 func validDomain(link string, domains []string) bool {
 	for _, d := range domains {
 		if strings.HasPrefix(link, d) {
@@ -90,7 +90,7 @@ type webPage struct {
 	links []string
 }
 
-// addWords fills words "set" with from input slice
+// addWords fills words "set" from input slice
 func (p *webPage) addWords(words []string) error {
 	for _, word := range words {
 		if word != "" {
